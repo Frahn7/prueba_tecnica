@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ProductProvider } from "./context/ProductContext";
 
 export const metadata: Metadata = {
   title: "Prueba técnica",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <ProductProvider>
+        <body>{children}</body>
+      </ProductProvider>
     </html>
   );
 }
