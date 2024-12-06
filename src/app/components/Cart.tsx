@@ -8,17 +8,17 @@ export const Cart = () => {
   const { cart } = useProductContext();
 
   return (
-    <div className="text-center bg-gray-300 max-w-full flex flex-col gap-2 rounded-xl">
-      <h1 className="text-[20px] font-bold mt-2">Carrito</h1>
-      <div className="mt-[20px] p-3">
+    <div className="text-center bg-gray-300 max-w-[95%] flex flex-col gap-2 rounded-xl">
+      <h1 className="text-[17px] font-bold mt-2">Carrito</h1>
+      <div className="mt-[20px] p-2">
         {cart.map((product, i) => (
           <div
             key={i}
-            className="flex flex-col border border-black rounded-[10px] p-4 mb-7 text-right"
+            className="flex flex-col border border-black rounded-[10px] p-3 mb-7 text-right"
           >
             <div className="flex flex-row ">
-              <Image alt="." src={product.image} width={80} height={80} />
-              <p className="text-[18px]">{product.title}</p>
+              <Image alt="." src={product.image} width={60} height={60} />
+              <p className="text-[16px]">{product.title}</p>
             </div>
             <div className="text-center ">
               Precio:{" "}

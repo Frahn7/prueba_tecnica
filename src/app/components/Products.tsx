@@ -18,14 +18,16 @@ export const Products = () => {
       : "flex flex-row w-full justify-between";
 
   return (
-    <div className="flex flex-row w-full px-10 justify-between">
+    <div className="flex flex-row w-full justify-between">
       <div className={sm}>
-        <div className="min-w-max bo">
+        <div className="min-w-max px-10">
           {products.map((product, i) => (
             <CardProducts key={i} product={product} />
           ))}
         </div>
-        <div className="max-w-[500px]">{cart.length >= 1 && <Cart />}</div>
+        <div className="max-w-[500px] lg:fixed lg:top-0 lg:right-0 sm:self-center mt-10">
+          {cart.length >= 1 && <Cart />}
+        </div>
       </div>
     </div>
   );
