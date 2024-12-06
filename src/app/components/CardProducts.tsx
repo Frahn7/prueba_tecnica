@@ -5,7 +5,6 @@ import { ProductsProps } from "../services/GetProducts";
 import Image from "next/image";
 import { Button } from "./ui/Button";
 import { useProductContext } from "../context/ProductContext";
-import useScreenProperties from "../hooks/useScreenProperties";
 
 interface PropsProduct {
   product: ProductsProps;
@@ -14,7 +13,6 @@ interface PropsProduct {
 export const CardProducts = ({ product }: PropsProduct) => {
   const { cart, removeFromCart, addToCart } = useProductContext();
   const [quantity, setQuantity] = useState(1);
-  const { width } = useScreenProperties();
 
   useEffect(() => {
     console.log(cart);
@@ -29,25 +27,18 @@ export const CardProducts = ({ product }: PropsProduct) => {
   };
 
   return (
-    <div className="mt-10 flex flex-row gap-2  justify-center text-left lg:text-nowrap ">
-      {width ? (
-        width <= 640 ? (
-          ""
-        ) : (
-          <div className="w-[220px] h-[220px] ">
-            <Image
-              width={250}
-              alt="."
-              src={product.image}
-              height={250}
-              className="p-2 rounded-3xl bg-zinc-200"
-            />
-          </div>
-        )
-      ) : (
-        ""
-      )}
-      <div className="w-[200px] font-semibold flex flex-col gap-2">
+    <div className="mt-10 flex lg:flex-row flex-col gap-2 text-left lg:text-nowrap ">
+      <div className="w-[220px] h-[220px]  ">
+        <Image
+          width={220}
+          alt="."
+          src={product.image}
+          height={220}
+          className="p-2 rounded-3xl bg-zinc-200 max-h-[220px]"
+        />
+      </div>
+
+      <div className="w-[200px] font-semibold flex flex-col gap-2 text-center lg:text-start">
         <h1 className="text-[25px] font-bold ">{product.title}</h1>
         {product.stock >= 1
           ? `Stock Disponible: ${product.stock}`
@@ -108,7 +99,7 @@ export const CardProducts = ({ product }: PropsProduct) => {
           </div>
         )}
 
-        <div>
+        <div className="flex flex-col ">
           <Button
             title="Agregar al carrito"
             variant="Default"

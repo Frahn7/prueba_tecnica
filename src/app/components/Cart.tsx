@@ -8,7 +8,7 @@ export const Cart = () => {
   const { cart } = useProductContext();
 
   return (
-    <div className="text-center bg-gray-300 max-w-[95%] flex flex-col gap-2 rounded-xl">
+    <div className="text-center bg-gray-300 rounded-br-[40px] lg:mx-2  max-w-full flex flex-col gap-2 rounded-xl">
       <h1 className="text-[17px] font-bold mt-2">Carrito</h1>
       <div className="mt-[20px] p-2">
         {cart.map((product, i) => (
@@ -16,9 +16,15 @@ export const Cart = () => {
             key={i}
             className="flex flex-col border border-black rounded-[10px] p-3 mb-7 text-right"
           >
-            <div className="flex flex-row ">
-              <Image alt="." src={product.image} width={60} height={60} />
-              <p className="text-[16px]">{product.title}</p>
+            <div className="flex flex-row max-w-[350px] min-w-[350px]">
+              <Image
+                alt="."
+                src={product.image}
+                width={60}
+                height={60}
+                className="max-h-[60px] "
+              />
+              <p className="text-[16px] ml-2 mr-4">{product.title}</p>
             </div>
             <div className="text-center ">
               Precio:{" "}
@@ -41,12 +47,14 @@ export const Cart = () => {
           </p>
         </div>
       </div>
-      <Button
-        title="Comprar"
-        variant="Default"
-        className="px-2"
-        style={{ width: "50%", alignSelf: "center" }}
-      />
+      {cart.length <= 0 ? null : (
+        <Button
+          title="Comprar"
+          variant="Default"
+          className="px-2"
+          style={{ width: "50%", alignSelf: "center" }}
+        />
+      )}
     </div>
   );
 };

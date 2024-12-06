@@ -19,7 +19,7 @@ export const ProductProvider = ({
 }) => {
   const [cart, setCart] = useState<ProductsProps[]>([]);
 
-  const addToCart = (product: any, quantity: number) => {
+  const addToCart = (product: ProductsProps, quantity: number) => {
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item.id === product.id);
 
