@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ProductsProps } from "./GetProducts";
+import { ProductsProps } from "../services/GetProducts";
 import Image from "next/image";
 import { Button } from "./ui/Button";
 import { useProductContext } from "../context/ProductContext";
@@ -71,7 +71,7 @@ export const CardProducts = ({ product }: PropsProduct) => {
             <p>
               Unidades:
               <span className="text-[19px] font-bold">
-                {Math.ceil(quantity * 198)}
+                {Math.ceil(quantity * (product?.unitValue ?? 0))}
               </span>
             </p>
           </div>
@@ -89,7 +89,7 @@ export const CardProducts = ({ product }: PropsProduct) => {
             <p>
               Cantidad cubierta:{" "}
               <span className="text-[19px] font-bold">
-                {Math.ceil(quantity * 2.68)}
+                {Math.ceil(quantity * (product?.unitValue ?? 0))}
               </span>
               m2
             </p>

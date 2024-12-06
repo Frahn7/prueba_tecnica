@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useState, useContext } from "react";
-import { ProductsProps } from "../components/GetProducts";
+import { ProductsProps } from "../services/GetProducts";
 
 type ProductContextType = {
   cart: ProductsProps[];
@@ -45,22 +45,9 @@ export const ProductProvider = ({
     });
   };
 
-  const removeFromCart = (productId: any) => {
+  const removeFromCart = (productId: number) => {
     setCart((prevCart) => {
-      return prevCart
-        .map((item) => {
-          if (item.id === productId) {
-            const quantity = item.quantity ?? 0;
-
-            if (quantity > 1) {
-              return { ...item, quantity: quantity - 1 };
-            }
-
-            return null;
-          }
-          return item;
-        })
-        .filter((item) => item !== null);
+      return prevCart.filter((item) => item.id !== productId);
     });
   };
 

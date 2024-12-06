@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import GetProducts from "./GetProducts";
+import GetProducts from "../services/GetProducts";
 import { CardProducts } from "./CardProducts";
 import { Cart } from "./Cart";
 import { useProductContext } from "../context/ProductContext";
