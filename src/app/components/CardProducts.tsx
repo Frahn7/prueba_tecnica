@@ -51,28 +51,47 @@ export const CardProducts = ({ product }: PropsProduct) => {
           <div className="flex flex-row gap-3">
             Cantidad de palets:
             <input
+              className="w-[45px] border border-black rounded-md text-center"
               min={1}
               type="number"
+              max={product.stock}
               placeholder={product.quantity?.toString()}
               onChange={(e) => setQuantity(Number(e.target.value))}
             />
+            <p>
+              Unidades:
+              <span className="text-[19px] font-bold">
+                {Math.ceil(quantity * 198)}
+              </span>
+            </p>
           </div>
         ) : product.salesUnit === "area" ? (
           <div className="flex flex-row gap-3">
             Cantidad de cajas:
             <input
+              className="w-[45px] border border-black rounded-md text-center"
               min={1}
+              max={product.stock}
               type="number"
               placeholder={product.quantity?.toString()}
               onChange={(e) => setQuantity(Number(e.target.value))}
             />
+            <p>
+              Cantidad cubierta:{" "}
+              <span className="text-[19px] font-bold">
+                {Math.ceil(quantity * 2.68)}
+              </span>
+              m2
+            </p>
           </div>
         ) : (
           <div className="flex flex-row gap-3">
             Cantidad:
             <input
+              className="w-[45px] border border-black rounded-md text-center"
               min={1}
               type="number"
+              max={product.stock}
               placeholder={product.quantity?.toString()}
               onChange={(e) => setQuantity(Number(e.target.value))}
             />
@@ -85,11 +104,19 @@ export const CardProducts = ({ product }: PropsProduct) => {
             variant="Default"
             onClick={() => handleAddToCart(product)}
           />
-          <Button
-            title="Eliminar del carrito"
-            variant=""
-            onClick={() => handleRemoveItem(product.id)}
-          />
+
+          {cart.map((products, i) =>
+            product.id === products.id ? (
+              <Button
+                key={i}
+                title="Eliminar del carrito"
+                variant=""
+                onClick={() => handleRemoveItem(product.id)}
+              />
+            ) : (
+              ""
+            )
+          )}
         </div>
       </div>
     </div>

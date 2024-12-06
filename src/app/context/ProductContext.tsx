@@ -24,16 +24,23 @@ export const ProductProvider = ({
       const existingProduct = prevCart.find((item) => item.id === product.id);
 
       if (existingProduct) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? {
-                ...item,
-                quantity: (item.quantity || 0) + (quantity > 0 ? quantity : 1),
-              }
-            : item
-        );
+        return prevCart.map((item) => {
+          if (item.id === product.id) {
+            const newQuantity =
+              (item.quantity || 0) + (quantity > 0 ? quantity : 1);
+            if (newQuantity > product.stock) {
+              return { ...item, quantity: product.stock };
+            }
+            return { ...item, quantity: newQuantity };
+          }
+          return item;
+        });
       } else {
-        return [...prevCart, { ...product, quantity }];
+        const initialQuantity = quantity > 0 ? quantity : 1;
+        if (initialQuantity > product.stock) {
+          return [...prevCart, { ...product, quantity: product.stock }];
+        }
+        return [...prevCart, { ...product, quantity: initialQuantity }];
       }
     });
   };
