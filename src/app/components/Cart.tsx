@@ -3,12 +3,14 @@
 import Image from "next/image";
 import { useProductContext } from "../context/ProductContext";
 import { Button } from "./ui/Button";
+import { IoMdAdd } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
 
 export const Cart = () => {
-  const { cart } = useProductContext();
+  const { cart, addToCart, removeFromCart } = useProductContext();
 
   return (
-    <div className="text-center bg-gray-300 rounded-br-[40px] lg:mx-2  max-w-full flex flex-col gap-2 rounded-xl">
+    <div className="text-center shadow-lg bg-gray-300 rounded-br-[40px] lg:mx-2  max-w-full flex flex-col gap-2 rounded-lg">
       <h1 className="text-[17px] font-bold mt-2">Carrito</h1>
       <div className="mt-[20px] p-2">
         {cart.map((product, i) => (
@@ -33,6 +35,16 @@ export const Cart = () => {
               </span>
               Cantidad: <span className="font-bold">{product.quantity}</span>
             </div>
+            <span className="flex justify-center flex-row gap-5 text-[25px] mt-2">
+              <IoMdAdd
+                className=" cursor-pointer hover:text-gray-600"
+                onClick={() => addToCart(product, 1)}
+              />
+              <MdDelete
+                className="text-red-500 cursor-pointer hover:text-gray-600"
+                onClick={() => removeFromCart(product.id)}
+              />
+            </span>
           </div>
         ))}
         <div>

@@ -45,7 +45,7 @@ export const CardProducts = ({ product }: PropsProduct) => {
           ? `Stock Disponible: ${product.stock}`
           : "No disponible"}
 
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row gap-2 w-full">
           <p className="text-[20px]">{formatCurrency(product.price)}</p>
 
           {product.listingPrice ? (
@@ -122,7 +122,7 @@ export const CardProducts = ({ product }: PropsProduct) => {
           </div>
         )}
 
-        <div className="flex flex-col ">
+        <div className="flex lg:flex-row flex-col ">
           <Button
             title="Agregar al carrito"
             variant="Default"
@@ -134,7 +134,7 @@ export const CardProducts = ({ product }: PropsProduct) => {
               <Button
                 key={i}
                 title="Eliminar del carrito"
-                variant=""
+                variant="Delete"
                 onClick={() => handleRemoveItem(product.id)}
               />
             ) : (
