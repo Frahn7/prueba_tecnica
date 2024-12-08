@@ -47,7 +47,7 @@ export const CardProducts = ({ product }: PropsProduct) => {
           ? `Stock Disponible: ${product.stock}`
           : "No disponible"}
 
-        <div className="flex flex-row gap-2 w-full">
+        <div className="flex flex-row gap-2 w-full justify-center lg:justify-start">
           <p className="text-[20px]">{formatCurrency(product.price)}</p>
 
           {product.listingPrice ? (
@@ -66,12 +66,10 @@ export const CardProducts = ({ product }: PropsProduct) => {
           <p>PU: {formatCurrency(product.price / product.unitValue)}</p>
         ) : null}
         {product.listingPrice ? (
-          <p className="text-[19px] line-through text-gray-500">
+          <p className="text-[17px] line-through text-gray-500">
             {formatCurrency(product?.listingPrice)}
           </p>
         ) : null}
-
-        <p className="text-gray-600">{product.description}</p>
 
         {product.salesUnit === "group" ? (
           <div className="flex flex-row gap-3">
@@ -123,6 +121,8 @@ export const CardProducts = ({ product }: PropsProduct) => {
             />
           </div>
         )}
+
+        <p className="text-gray-600">{product.description}</p>
 
         <div className="flex lg:flex-row flex-col ">
           <Button

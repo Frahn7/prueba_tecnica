@@ -51,6 +51,33 @@ export default function GetProducts() {
       image: "/img/barra.jpg",
       quantity: 1,
     },
+    {
+      id: 5001,
+      title: "Pintura Latex Blanco Mate 20L",
+      description:
+        "Pintura Latex Blanco Mate, ideal para interiores y exteriores",
+      price: 15240,
+      listingPrice: 20350,
+      stock: 10,
+      salesUnit: "unit",
+      measurementUnit: "m2",
+      unitValue: 20,
+      image: "/img/pintura.jpg",
+      quantity: 1,
+    },
+    {
+      id: 8003,
+      title: "Bolsa de Cemento Portland 50Kg",
+      description:
+        "Bolsa de Cemento Portland de 50Kg para uso general en construcción",
+      price: 2475,
+      stock: 25,
+      salesUnit: "unit",
+      measurementUnit: "bolson",
+      unitValue: 50,
+      image: "/img/cemento.jpg",
+      quantity: 1,
+    },
   ];
 
   return { products };
