@@ -5,6 +5,7 @@ import { ProductsProps } from "../services/GetProducts";
 import Image from "next/image";
 import { Button } from "./ui/Button";
 import { useProductContext } from "../context/ProductContext";
+import { formatCurrency } from "../utils/format";
 
 interface PropsProduct {
   product: ProductsProps;
@@ -44,7 +45,29 @@ export const CardProducts = ({ product }: PropsProduct) => {
           ? `Stock Disponible: ${product.stock}`
           : "No disponible"}
 
-        <p className="text-[20px]">${product.price.toLocaleString("es-ES")}</p>
+        <div className="flex flex-row gap-2">
+          <p className="text-[20px]">{formatCurrency(product.price)}</p>
+
+          {product.listingPrice ? (
+            <p className="bg-blue-500 py-0.5 self-start px-2 text-sm rounded-lg text-white">
+              {Math.round(
+                ((product.listingPrice - product.price) /
+                  product.listingPrice) *
+                  100
+              )}
+              % OFF
+            </p>
+          ) : null}
+        </div>
+
+        {product.salesUnit === "group" && product.unitValue ? (
+          <p>PU: {formatCurrency(product.price / product.unitValue)}</p>
+        ) : null}
+        {product.listingPrice ? (
+          <p className="text-[19px] line-through text-gray-500">
+            {formatCurrency(product?.listingPrice)}
+          </p>
+        ) : null}
 
         <p className="text-gray-600">{product.description}</p>
 
