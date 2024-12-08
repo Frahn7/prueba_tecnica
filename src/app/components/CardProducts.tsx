@@ -41,7 +41,6 @@ export const CardProducts = ({ product }: PropsProduct) => {
           className="p-2 rounded-3xl bg-zinc-200 max-h-[220px]"
         />
       </div>
-
       <div className="w-[200px] font-semibold flex flex-col gap-2 text-center lg:text-start">
         <h1 className="text-[25px] font-bold ">{product.title}</h1>
         {product.stock >= 1
