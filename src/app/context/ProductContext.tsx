@@ -8,6 +8,7 @@ type ProductContextType = {
   cart: ProductsProps[];
   addToCart: (product: ProductsProps, quantity: number) => void;
   removeFromCart: (productId: number) => void;
+  reduceQuantityCart: (productId: number) => void;
 };
 
 const ProductContext = createContext<ProductContextType | null>(null);
@@ -51,8 +52,23 @@ export const ProductProvider = ({
     });
   };
 
+  const reduceQuantityCart = (productId: number) => {
+    setCart((prevCart) => {
+      return prevCart
+        .map((item) => {
+          if (item.id === productId && item.quantity > 0) {
+            return { ...item, quantity: item.quantity - 1 };
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0);
+    });
+  };
+
   return (
-    <ProductContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <ProductContext.Provider
+      value={{ cart, addToCart, removeFromCart, reduceQuantityCart }}
+    >
       {children}
     </ProductContext.Provider>
   );

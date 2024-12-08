@@ -5,12 +5,14 @@ import { useProductContext } from "../context/ProductContext";
 import { Button } from "./ui/Button";
 import { IoMdAdd } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import { RiSubtractLine } from "react-icons/ri";
 
 export const Cart = () => {
-  const { cart, addToCart, removeFromCart } = useProductContext();
+  const { cart, addToCart, removeFromCart, reduceQuantityCart } =
+    useProductContext();
 
   return (
-    <div className="text-center shadow-lg bg-gray-300 rounded-br-[40px] lg:mx-2  max-w-full flex flex-col gap-2 rounded-lg">
+    <div className="text-center shadow-lg bg-gray-300 rounded-br-[40px] lg:mx-2  max-w-full flex flex-col gap-2 rounded-lg max-h-[450px] overflow-y-scroll">
       <h1 className="text-[17px] font-bold mt-2">Carrito</h1>
       <div className="mt-[20px] p-2">
         {cart.map((product, i) => (
@@ -39,6 +41,10 @@ export const Cart = () => {
               <IoMdAdd
                 className=" cursor-pointer hover:text-gray-600"
                 onClick={() => addToCart(product, 1)}
+              />
+              <RiSubtractLine
+                className=" cursor-pointer hover:text-gray-600"
+                onClick={() => reduceQuantityCart(product.id)}
               />
               <MdDelete
                 className="text-red-500 cursor-pointer hover:text-gray-600"

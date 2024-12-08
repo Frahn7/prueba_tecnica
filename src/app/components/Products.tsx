@@ -27,7 +27,7 @@ export const Products = () => {
             <CardProducts key={i} product={product} />
           ))}
         </div>
-        {cart.length >= 1 ? (
+        {cart.length >= 1 && (
           <div className="self-center lg:fixed lg:bottom-0 lg:right-0  mt-10 p-1">
             <div className="border border-black rounded-full bg-black text-white text-center">
               <IoCartOutline
@@ -36,8 +36,6 @@ export const Products = () => {
               />
             </div>
           </div>
-        ) : (
-          ""
         )}
 
         {handleCart ||
