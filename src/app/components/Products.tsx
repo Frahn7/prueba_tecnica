@@ -37,12 +37,13 @@ export const Products = () => {
           ))}
         </div>
         {cart.length >= 1 && (
-          <div className="self-center lg:fixed lg:bottom-0 lg:right-0  mt-10 p-1">
-            <div className="border border-black rounded-full bg-black text-white text-center">
+          <div className="self-center lg:fixed lg:bottom-0 lg:right-0  mt-10 p-1 z-10">
+            <div className="border border-black rounded-full flex-row flex p-1 bg-black text-white text-center">
               <IoCartOutline
                 className="text-[30px] p-1 mr-1 cursor-pointer "
                 onClick={() => setHandleCart(!handleCart)}
               />
+              {cart.length}
             </div>
           </div>
         )}

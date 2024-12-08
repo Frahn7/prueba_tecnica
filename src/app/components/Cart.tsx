@@ -12,67 +12,72 @@ export const Cart = () => {
     useProductContext();
 
   return (
-    <div className="text-center shadow-lg bg-gray-300 rounded-br-[40px] lg:mx-2  max-w-full flex flex-col gap-2 rounded-lg max-h-[450px] overflow-y-scroll">
+    <div className="text-center shadow-lg bg-gray-300 rounded-br-[40px] lg:mx-2  max-w-full flex flex-col gap-2 rounded-lg ">
       <h1 className="text-[17px] font-bold mt-2">Carrito</h1>
-      <div className="mt-[20px] p-2">
-        {cart.map((product, i) => (
-          <div
-            key={i}
-            className="flex flex-col border border-black rounded-[10px] p-3 mb-7 text-right"
-          >
-            <div className="flex flex-row max-w-[350px] min-w-[350px]">
-              <Image
-                alt="."
-                src={product.image}
-                width={60}
-                height={60}
-                className="max-h-[60px] "
-              />
-              <p className="text-[16px] ml-2 mr-4">{product.title}</p>
-            </div>
-            <div className="text-center ">
-              Precio:{" "}
-              <span className="font-bold mr-4">
-                {product.price.toLocaleString("es-ES")}
+      <div>
+        <div className="mt-[20px] p-2 max-h-[300px] overflow-y-scroll">
+          {cart.map((product, i) => (
+            <div
+              key={i}
+              className="flex flex-col border border-black rounded-[10px] p-3 mb-7 text-right"
+            >
+              <div className="flex flex-row max-w-[350px] min-w-[350px]">
+                <Image
+                  alt="."
+                  src={product.image}
+                  width={60}
+                  height={60}
+                  className="max-h-[60px] "
+                />
+                <p className="text-[16px] ml-2 mr-4">{product.title}</p>
+              </div>
+              <div className="text-center ">
+                Precio:{" "}
+                <span className="font-bold mr-4">
+                  {product.price.toLocaleString("es-ES")}
+                </span>
+                Cantidad: <span className="font-bold">{product.quantity}</span>
+              </div>
+              <span className="flex justify-center flex-row gap-5 text-[25px] mt-2">
+                <IoMdAdd
+                  className=" cursor-pointer hover:text-gray-600"
+                  onClick={() => addToCart(product, 1)}
+                />
+                <RiSubtractLine
+                  className=" cursor-pointer hover:text-gray-600"
+                  onClick={() => reduceQuantityCart(product.id)}
+                />
+                <MdDelete
+                  className="text-red-500 cursor-pointer hover:text-gray-600"
+                  onClick={() => removeFromCart(product.id)}
+                />
               </span>
-              Cantidad: <span className="font-bold">{product.quantity}</span>
             </div>
-            <span className="flex justify-center flex-row gap-5 text-[25px] mt-2">
-              <IoMdAdd
-                className=" cursor-pointer hover:text-gray-600"
-                onClick={() => addToCart(product, 1)}
-              />
-              <RiSubtractLine
-                className=" cursor-pointer hover:text-gray-600"
-                onClick={() => reduceQuantityCart(product.id)}
-              />
-              <MdDelete
-                className="text-red-500 cursor-pointer hover:text-gray-600"
-                onClick={() => removeFromCart(product.id)}
-              />
-            </span>
+          ))}
+        </div>
+        <div className="flex flex-col gap-2 mt-5">
+          <div>
+            <p className="font-bold text-[19px]">
+              Total: $
+              {cart
+                .reduce(
+                  (total, product) => total + product.price * product.quantity,
+                  0
+                )
+                .toLocaleString("es-ES")}
+            </p>
           </div>
-        ))}
-        <div>
-          <p className="font-bold text-[19px]">
-            Total: $
-            {cart
-              .reduce(
-                (total, product) => total + product.price * product.quantity,
-                0
-              )
-              .toLocaleString("es-ES")}
-          </p>
+
+          {cart.length <= 0 ? null : (
+            <Button
+              title="Comprar"
+              variant="Default"
+              className="px-2"
+              style={{ width: "50%", alignSelf: "center" }}
+            />
+          )}
         </div>
       </div>
-      {cart.length <= 0 ? null : (
-        <Button
-          title="Comprar"
-          variant="Default"
-          className="px-2"
-          style={{ width: "50%", alignSelf: "center" }}
-        />
-      )}
     </div>
   );
 };

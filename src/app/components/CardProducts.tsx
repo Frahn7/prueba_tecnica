@@ -15,6 +15,8 @@ export const CardProducts = ({ product }: PropsProduct) => {
   const { cart, removeFromCart, addToCart } = useProductContext();
   const [quantity, setQuantity] = useState(1);
   const [titleButton, setTitleButton] = useState("Agregar al carrito");
+  const [valueM2, setValueM2] = useState("");
+  const [valueUnits, setValueUnits] = useState("");
 
   useEffect(() => {
     if (cart.length >= 1 && cart.some((e) => e.id === product.id)) {
@@ -79,34 +81,46 @@ export const CardProducts = ({ product }: PropsProduct) => {
               min={1}
               type="number"
               max={product.stock}
-              placeholder={product.quantity?.toString()}
+              placeholder={Math.ceil(
+                Number(valueUnits) / product.unitValue!
+              ).toString()}
               onChange={(e) => setQuantity(Number(e.target.value))}
             />
             <p>
               Unidades:
-              <span className="text-[19px] font-bold">
-                {Math.ceil(quantity * (product?.unitValue ?? 0))}
-              </span>
+              <input
+                className="w-[45px] border border-black rounded-md text-center"
+                min={1}
+                type="number"
+                placeholder={(quantity * product.unitValue!).toString()}
+                onChange={(e) => setValueUnits(e.target.value)}
+              />
             </p>
           </div>
         ) : product.salesUnit === "area" ? (
           <div className="flex flex-row gap-3">
-            Cantidad de {product.measurementUnit}:
+            <p>
+              Superficie:{" "}
+              <input
+                type="number"
+                min={0}
+                className="w-[60px] border border-black rounded-md text-center"
+                placeholder={Math.ceil(
+                  quantity * (product?.unitValue ?? 0)
+                ).toString()}
+                onChange={(e) => setValueM2(e.target.value)}
+              />
+              {product.measurementUnit}
+            </p>
+            Cantidad de cajas:
             <input
-              className="w-[45px] border border-black rounded-md text-center"
+              className="w-[90px] border border-black rounded-md text-center"
               min={1}
               max={product.stock}
               type="number"
-              placeholder={product.quantity?.toString()}
+              placeholder={Math.ceil(Number(valueM2) / 2.68).toString()}
               onChange={(e) => setQuantity(Number(e.target.value))}
             />
-            <p>
-              Cantidad cubierta:{" "}
-              <span className="text-[19px] font-bold">
-                {Math.ceil(quantity * (product?.unitValue ?? 0))}
-              </span>
-              m2
-            </p>
           </div>
         ) : (
           <div className="flex flex-row gap-3">
