@@ -28,7 +28,7 @@ export const CardProducts = ({ product }: PropsProduct) => {
   };
 
   return (
-    <div className="mt-10 flex lg:flex-row flex-col gap-2 text-left lg:text-nowrap ">
+    <div className="mt-10 flex   lg:min-h-[300px] lg:max-h-[300px] items-center  lg:flex-row flex-col gap-2 text-left lg:text-nowrap ">
       <div className="w-[220px] h-[220px]  ">
         <Image
           width={220}
