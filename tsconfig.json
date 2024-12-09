@@ -11,6 +11,8 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    //PARA CORRER LA APP CON NEXTJS USAR ESTA CONFIGURACION "jsx": "preserve",
+    //PARA EJECUTAR LOS TEST DE VITEST PONER ESTA CONFIGURACION : "jsx": "react-jsx",
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
